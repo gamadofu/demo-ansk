@@ -3,8 +3,7 @@ import type { PageServerLoad } from './$types';
 import { mockCustomers } from '$lib/data/mockCustomers';
 import { mockOrders } from '$lib/data/mockOrders';
 
-// SSGの設定
-export const prerender = true;
+// SSGの設定を削除
 
 export const load: PageServerLoad = async ({ params }) => {
   const customerId = params.id;

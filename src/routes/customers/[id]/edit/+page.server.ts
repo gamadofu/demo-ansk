@@ -2,8 +2,7 @@ import { error, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { mockCustomers } from '$lib/data/mockCustomers';
 
-// SSGの設定
-export const prerender = true;
+// SSGの設定を削除
 
 export const load: PageServerLoad = async ({ params }) => {
   const customerId = params.id;

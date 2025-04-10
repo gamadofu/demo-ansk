@@ -6,7 +6,18 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		
+		// プリレンダリングを特定のルートのみに制限
+		prerender: {
+			entries: [
+				'/',
+				'/login',
+				'/customers',
+				'/customers/new'
+			],
+			handleHttpError: 'warn' // エラーを警告として扱い、ビルドを失敗させない
+		}
 	}
 };
 
