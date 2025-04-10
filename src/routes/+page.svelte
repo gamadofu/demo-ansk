@@ -97,26 +97,26 @@
 	<div class="bg-white rounded-lg shadow p-6">
 		<h2 class="text-lg font-semibold text-gray-800 mb-4">クイックアクセス</h2>
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-			<a href="/orders/search" class="flex items-center p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+			<div class="flex items-center p-4 bg-blue-50 rounded-lg">
 				<svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
 				</svg>
-				<span class="ml-3 text-blue-800 font-medium">注文検索</span>
-			</a>
+				<span class="ml-3 text-blue-800 font-medium">注文検索（実装予定）</span>
+			</div>
 			
-			<a href="/orders/processing" class="flex items-center p-4 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition-colors">
+			<div class="flex items-center p-4 bg-yellow-50 rounded-lg">
 				<svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 				</svg>
-				<span class="ml-3 text-yellow-800 font-medium">対応中注文</span>
-			</a>
+				<span class="ml-3 text-yellow-800 font-medium">対応中注文（実装予定）</span>
+			</div>
 			
-			<a href="/payments" class="flex items-center p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
+			<div class="flex items-center p-4 bg-green-50 rounded-lg">
 				<svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
 				</svg>
-				<span class="ml-3 text-green-800 font-medium">入金管理</span>
-			</a>
+				<span class="ml-3 text-green-800 font-medium">入金管理（実装予定）</span>
+			</div>
 			
 			<a href="/customers" class="flex items-center p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
 				<svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -147,7 +147,7 @@
 				<tbody class="bg-white divide-y divide-gray-200">
 					{#each recentOrders as order}
 					<tr>
-						<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600"><a href="/orders/{order.id}">{order.id}</a></td>
+						<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">{order.id}</td>
 						<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{order.customer}</td>
 						<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{order.product}</td>
 						<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{formatCurrency(order.amount)}</td>
@@ -161,7 +161,7 @@
 			</table>
 		</div>
 		<div class="p-4 border-t border-gray-200 bg-gray-50 text-right">
-			<a href="/orders" class="text-blue-600 hover:text-blue-800 text-sm font-medium">すべての注文を表示 &rarr;</a>
+			<span class="text-gray-500 text-sm font-medium">すべての注文を表示（実装予定）</span>
 		</div>
 	</div>
 </div>

@@ -6,7 +6,19 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		prerender: {
+			handleHttpError: ({ path, referrer, message }) => {
+				// フォームアクションを含むページのエラーを無視
+				if (path.includes('/customers/new') || path.includes('/edit')) {
+					return;
+				}
+				
+				// それ以外のエラーは通常通り処理
+				console.error(`${path} からのエラー: ${message}`);
+				throw new Error(message);
+			}
+		}
 	}
 };
 

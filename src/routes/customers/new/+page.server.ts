@@ -2,8 +2,8 @@ import { redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { mockCustomers } from '$lib/data/mockCustomers';
 
-// SSGの設定
-export const prerender = true;
+// フォームアクションを含むページはプリレンダリングできない
+export const prerender = false;
 
 export const load: PageServerLoad = async () => {
   // 新規顧客登録ページのロード処理
