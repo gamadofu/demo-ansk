@@ -2,6 +2,9 @@
 name = "demo-ansk"
 compatibility_date = "2023-10-30"
 
+# _middleware.jsを使用してBasic認証を設定
+main = "./functions/_middleware.js"
+
 # 静的アセットの設定
 # 新しいWorkers Static Assets機能を使用
 [build]
