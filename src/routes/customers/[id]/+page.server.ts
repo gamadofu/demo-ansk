@@ -6,6 +6,13 @@ import { mockOrders } from '$lib/data/mockOrders';
 // SSGの設定
 export const prerender = true;
 
+// プリレンダリングするエントリーポイントを指定
+export function entries() {
+  return mockCustomers.map(customer => ({
+    id: customer.customer_id
+  }));
+}
+
 export const load: PageServerLoad = async ({ params }) => {
   const customerId = params.id;
   
