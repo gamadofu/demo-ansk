@@ -10,13 +10,12 @@
   const menuItems: MenuItem[] = [
     { title: 'ダッシュボード', path: '/', icon: 'home' },
     { title: '顧客管理', path: '/customers', icon: 'users' },
-    // 実装予定のページはコメントアウト
-    // { title: '注文管理', path: '/orders', icon: 'shopping-cart' },
-    // { title: '入金管理', path: '/payments', icon: 'credit-card' },
-    // { title: '仕入先管理', path: '/suppliers', icon: 'truck' },
-    // { title: '検品・オプション', path: '/inspections', icon: 'check-square' },
-    // { title: '配送管理', path: '/shipping', icon: 'package' },
-    // { title: '副材資材管理', path: '/materials', icon: 'box' },
+    { title: '注文管理', path: '#', icon: 'shopping-cart' },
+    { title: '入金管理', path: '#', icon: 'credit-card' },
+    { title: '仕入先管理', path: '#', icon: 'truck' },
+    { title: '検品・オプション', path: '#', icon: 'check-square' },
+    { title: '配送管理', path: '#', icon: 'package' },
+    { title: '副材資材管理', path: '#', icon: 'box' },
   ];
 </script>
 
