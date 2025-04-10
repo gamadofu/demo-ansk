@@ -2,8 +2,8 @@ import { error, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { mockCustomers } from '$lib/data/mockCustomers';
 
-// 動的ルートのプリレンダリングを無効化
-export const prerender = false;
+// SSGの設定
+export const prerender = true;
 
 export const load: PageServerLoad = async ({ params }) => {
   const customerId = params.id;

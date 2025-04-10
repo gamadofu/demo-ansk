@@ -7,7 +7,6 @@ const config = {
 
 	kit: {
 		adapter: adapter()
-		// プリレンダリング設定を削除
 	}
 };
 

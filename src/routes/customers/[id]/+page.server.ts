@@ -3,8 +3,8 @@ import type { PageServerLoad } from './$types';
 import { mockCustomers } from '$lib/data/mockCustomers';
 import { mockOrders } from '$lib/data/mockOrders';
 
-// 動的ルートのプリレンダリングを無効化
-export const prerender = false;
+// SSGの設定
+export const prerender = true;
 
 export const load: PageServerLoad = async ({ params }) => {
   const customerId = params.id;
