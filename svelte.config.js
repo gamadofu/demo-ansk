@@ -7,6 +7,17 @@ const config = {
 
   kit: {
     adapter: adapter(),
+    prerender: {
+      handleHttpError: ({ path, referrer, message }) => {
+        // アクションを持つページのエラーを無視する
+        if (message.includes('Cannot prerender pages with actions')) {
+          return;
+        }
+        
+        // その他のエラーはコンソールに表示
+        console.warn(`${path} のプレレンダリングに失敗しました。参照元: ${referrer}\n${message}`);
+      }
+    }
   },
 };
 
