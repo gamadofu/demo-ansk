@@ -1,16 +1,48 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import { getUnprocessedOrderCount, getOrderCountByStatus } from '$lib/data/mockOrders';
+  import { orderStatusColors } from '$lib/data/orderLabels';
+  
+  // 各ステータスの注文数を取得
+  const unprocessedCount = getOrderCountByStatus('未処理');
+  const orderingCount = getOrderCountByStatus('注文中');
+  const exchangingCount = getOrderCountByStatus('交換中');
+  const shippedCount = getOrderCountByStatus('発送済');
+  const deliveredCount = getOrderCountByStatus('到着済');
+  
+
   
   type MenuItem = {
     title: string;
     path: string;
     icon: string;
+    badge?: number; // バッジ表示用の件数
+    subItems?: SubMenuItem[];
+  };
+  
+  type SubMenuItem = {
+    title: string;
+    path: string;
+    colorClass?: string;
+    count?: number;
   };
   
   const menuItems: MenuItem[] = [
     { title: 'ダッシュボード', path: '/', icon: 'home' },
     { title: '顧客管理', path: '/customers', icon: 'users' },
-    { title: '注文管理', path: '#', icon: 'shopping-cart' },
+    { 
+      title: '注文管理', 
+      path: '/orders', 
+      icon: 'shopping-cart', 
+      badge: unprocessedCount,
+      subItems: [
+        { title: '未処理', path: '/orders/status/未処理', colorClass: orderStatusColors['未処理'], count: unprocessedCount },
+        { title: '注文中', path: '/orders/status/注文中', colorClass: orderStatusColors['注文中'], count: orderingCount },
+        { title: '交換中', path: '/orders/status/交換中', colorClass: orderStatusColors['交換中'], count: exchangingCount },
+        { title: '発送済', path: '/orders/status/発送済', colorClass: orderStatusColors['発送済'], count: shippedCount },
+        { title: '到着済', path: '/orders/status/到着済', colorClass: orderStatusColors['到着済'], count: deliveredCount }
+      ]
+    },
     { title: '入金管理', path: '#', icon: 'credit-card' },
     { title: '仕入先管理', path: '#', icon: 'truck' },
     { title: '検品・オプション', path: '#', icon: 'check-square' },
@@ -55,9 +87,32 @@
               </svg>
             </span>
             <span>{item.title}</span>
+            {#if item.badge && item.badge > 0}
+              <span class="ml-2 px-2 py-0.5 text-xs font-semibold bg-red-500 text-white rounded-full">{item.badge}</span>
+            {/if}
           </a>
+          
+          <!-- サブメニュー項目 -->
+          {#if item.subItems && $page.url.pathname.startsWith(item.path)}
+            <ul class="pl-8 mt-1 mb-2 space-y-1">
+              {#each item.subItems as subItem}
+                <li>
+                  <a 
+                    href={subItem.path} 
+                    class="flex items-center px-4 py-2 hover:bg-gray-700 transition-colors text-sm {$page.url.pathname === subItem.path ? 'bg-blue-600' : ''}"
+                  >
+                    <span class="{subItem.colorClass} px-2 py-0.5 rounded-sm">
+                      {subItem.title} {#if subItem.count && subItem.count > 0}({subItem.count}){/if}
+                    </span>
+                  </a>
+                </li>
+              {/each}
+            </ul>
+          {/if}
         </li>
       {/each}
+
+
     </ul>
   </nav>
   

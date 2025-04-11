@@ -21,9 +21,6 @@
 - **Cloudflare Pages:** [https://pages.cloudflare.com/](https://pages.cloudflare.com/)
 
 ## 開発ツール
-- **Linting:** ESLint
-- **Formatting:** Prettier
-- **Testing:** Vitest (推奨)
 
 ## その他
 - (必要に応じて追記)
