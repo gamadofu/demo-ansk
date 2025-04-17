@@ -43,7 +43,7 @@
         { title: '到着済', path: '/orders/status/到着済', colorClass: orderStatusColors['到着済'], count: deliveredCount }
       ]
     },
-    { title: '入金管理', path: '#', icon: 'credit-card' },
+    { title: '入金管理', path: '/deposits', icon: 'credit-card' },
     { title: '仕入先管理', path: '#', icon: 'truck' },
     { title: '検品・オプション', path: '#', icon: 'check-square' },
     { title: '配送管理', path: '#', icon: 'package' },

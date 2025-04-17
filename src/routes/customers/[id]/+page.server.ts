@@ -2,6 +2,7 @@ import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { mockCustomers } from '$lib/data/mockCustomers';
 import { mockOrders } from '$lib/data/mockOrders';
+import { mockDeposits } from '$lib/data/mockDeposits';
 
 // SSGの設定
 export const prerender = true;
@@ -19,19 +20,10 @@ export const load: PageServerLoad = async ({ params }) => {
   // この顧客の注文履歴を取得（モックデータなのでcustomer_nameで代用）
   const customerOrders = mockOrders.filter(order => order.customer_name === customer.full_name);
   
-  // 入金履歴（モックデータなので仮の入金履歴を生成）
-  const deposits = Array(customer.total_deposit_count).fill(null).map((_, index) => {
-    const date = new Date();
-    date.setDate(date.getDate() - (index * 15)); // 15日ごとに過去の入金があったと仮定
-    
-    return {
-      id: `dep-${customerId}-${index + 1}`,
-      amount: Math.floor(Math.random() * 50000) + 10000, // 10,000円〜60,000円のランダムな金額
-      date: date.toISOString(),
-      method: ['銀行振込', 'クレジットカード', 'PayPal'][Math.floor(Math.random() * 3)],
-      note: index === 0 ? '初回入金' : ''
-    };
-  });
+  // この顧客の入金履歴を取得し、日付の降順（新しい順）に並べ替え
+  const customerDeposits = mockDeposits
+    .filter(deposit => deposit.customer_id === customerId)
+    .sort((a, b) => new Date(b.deposit_date).getTime() - new Date(a.deposit_date).getTime());
   
   return {
     customer: {
@@ -53,6 +45,19 @@ export const load: PageServerLoad = async ({ params }) => {
       status: order.china_order_status,
       createdAt: order.created_at
     })),
-    deposits
+    deposits: customerDeposits.map(deposit => ({
+      deposit_id: deposit.deposit_id,
+      customer_id: deposit.customer_id,
+      deposit_date: deposit.deposit_date,
+      week_type: deposit.week_type,
+      amount_jpy: deposit.amount_jpy,
+      yuan_conversion: deposit.yuan_conversion,
+      exchange_rate: deposit.exchange_rate,
+      remaining_yuan: deposit.remaining_yuan,
+      remaining_jpy: deposit.remaining_jpy,
+      note: deposit.note,
+      customer_name: customer.full_name,
+      customer_nickname: customer.nickname
+    }))
   };
 };
