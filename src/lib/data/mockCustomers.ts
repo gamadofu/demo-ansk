@@ -11,6 +11,8 @@ export type Customer = {
   spreadsheet_url: string;
   created_at: string;
   updated_at: string;
+  store_type: 'base' | 'shopify';
+  store_id: string;
 };
 
 // 顧客のモックデータ
@@ -27,6 +29,8 @@ export const mockCustomers: Customer[] = [
     spreadsheet_url: 'https://docs.google.com/spreadsheets/d/1abc123/edit',
     created_at: '2024-12-15T09:30:00Z',
     updated_at: '2025-03-20T14:45:00Z',
+    store_type: 'base',
+    store_id: 'base_12345',
   },
   {
     customer_id: '2',
@@ -40,6 +44,8 @@ export const mockCustomers: Customer[] = [
     spreadsheet_url: 'https://docs.google.com/spreadsheets/d/2def456/edit',
     created_at: '2025-01-05T11:20:00Z',
     updated_at: '2025-03-25T16:30:00Z',
+    store_type: 'shopify',
+    store_id: 'shop_67890',
   },
   {
     customer_id: '3',
@@ -53,6 +59,8 @@ export const mockCustomers: Customer[] = [
     spreadsheet_url: 'https://docs.google.com/spreadsheets/d/3ghi789/edit',
     created_at: '2025-01-20T13:45:00Z',
     updated_at: '2025-03-28T10:15:00Z',
+    store_type: 'base',
+    store_id: 'base_23456',
   },
   {
     customer_id: '4',
@@ -66,19 +74,23 @@ export const mockCustomers: Customer[] = [
     spreadsheet_url: 'https://docs.google.com/spreadsheets/d/4jkl012/edit',
     created_at: '2025-02-03T10:10:00Z',
     updated_at: '2025-03-30T09:20:00Z',
+    store_type: 'shopify',
+    store_id: 'shop_78901',
   },
   {
     customer_id: '5',
     full_name: '伊藤健太',
     nickname: 'ケンタ',
     email: 'kenta.ito@example.com',
-    charge_balance: 34600,
+    charge_balance: 2320,
     total_deposit_amount: 100000,
     total_deposit_count: 2,
     chatwork_id: 'ito_kenta',
     spreadsheet_url: 'https://docs.google.com/spreadsheets/d/5mno345/edit',
     created_at: '2025-02-15T15:30:00Z',
     updated_at: '2025-04-01T11:40:00Z',
+    store_type: 'base',
+    store_id: 'base_34567',
   },
   {
     customer_id: '6',
@@ -92,6 +104,8 @@ export const mockCustomers: Customer[] = [
     spreadsheet_url: 'https://docs.google.com/spreadsheets/d/6pqr678/edit',
     created_at: '2025-02-28T09:15:00Z',
     updated_at: '2025-04-03T14:25:00Z',
+    store_type: 'shopify',
+    store_id: 'shop_89012',
   },
   {
     customer_id: '7',
@@ -105,6 +119,8 @@ export const mockCustomers: Customer[] = [
     spreadsheet_url: 'https://docs.google.com/spreadsheets/d/7stu901/edit',
     created_at: '2025-03-10T11:50:00Z',
     updated_at: '2025-04-05T16:35:00Z',
+    store_type: 'base',
+    store_id: 'base_45678',
   },
   {
     customer_id: '8',
@@ -118,6 +134,8 @@ export const mockCustomers: Customer[] = [
     spreadsheet_url: 'https://docs.google.com/spreadsheets/d/8vwx234/edit',
     created_at: '2025-03-20T14:20:00Z',
     updated_at: '2025-04-07T10:30:00Z',
+    store_type: 'shopify',
+    store_id: 'shop_90123',
   },
   {
     customer_id: '9',
@@ -131,6 +149,8 @@ export const mockCustomers: Customer[] = [
     spreadsheet_url: 'https://docs.google.com/spreadsheets/d/9yz567/edit',
     created_at: '2025-03-25T16:40:00Z',
     updated_at: '2025-04-08T13:15:00Z',
+    store_type: 'base',
+    store_id: 'base_56789',
   },
   {
     customer_id: '10',
@@ -144,6 +164,8 @@ export const mockCustomers: Customer[] = [
     spreadsheet_url: 'https://docs.google.com/spreadsheets/d/10abc890/edit',
     created_at: '2025-04-01T10:05:00Z',
     updated_at: '2025-04-09T15:50:00Z',
+    store_type: 'shopify',
+    store_id: 'shop_01234',
   },
 ];
 

@@ -11,14 +11,15 @@ export const load: PageServerLoad = async () => {
     customers: mockCustomers.map(customer => ({
       id: customer.customer_id,
       name: customer.full_name,
-      nickname: customer.nickname,
       email: customer.email,
       balance: customer.charge_balance,
       totalDeposit: customer.total_deposit_amount,
       depositCount: customer.total_deposit_count,
       chatworkId: customer.chatwork_id,
       spreadsheetUrl: customer.spreadsheet_url,
-      createdAt: customer.created_at
+      createdAt: customer.created_at,
+      storeType: customer.store_type,
+      storeId: customer.store_id
     }))
   };
 };

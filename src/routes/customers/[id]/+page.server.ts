@@ -36,7 +36,9 @@ export const load: PageServerLoad = async ({ params }) => {
       depositCount: customer.total_deposit_count,
       chatworkId: customer.chatwork_id,
       spreadsheetUrl: customer.spreadsheet_url,
-      createdAt: customer.created_at
+      createdAt: customer.created_at,
+      storeType: customer.store_type,
+      storeId: customer.store_id
     },
     orders: customerOrders.map(order => ({
       id: order.order_id,

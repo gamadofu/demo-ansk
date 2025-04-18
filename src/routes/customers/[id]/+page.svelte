@@ -178,6 +178,26 @@
             <dt class="text-sm font-medium text-gray-500">登録日</dt>
             <dd class="text-base">{formatDate(data.customer.createdAt)}</dd>
           </div>
+          <div>
+            <dt class="text-sm font-medium text-gray-500">ストアタイプ</dt>
+            <dd class="text-base">
+              {#if data.customer.storeType === 'base'}
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                  BASE
+                </span>
+              {:else if data.customer.storeType === 'shopify'}
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                  Shopify
+                </span>
+              {:else}
+                未設定
+              {/if}
+            </dd>
+          </div>
+          <div>
+            <dt class="text-sm font-medium text-gray-500">ストアID</dt>
+            <dd class="text-base">{data.customer.storeId || "未設定"}</dd>
+          </div>
         </dl>
       </div>
     </div>

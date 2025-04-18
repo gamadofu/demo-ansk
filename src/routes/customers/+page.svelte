@@ -26,7 +26,7 @@
 	$: filteredCustomers = customers.filter(customer => 
 		customer.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
 		customer.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-		customer.nickname.toLowerCase().includes(searchQuery.toLowerCase())
+		customer.storeId.toLowerCase().includes(searchQuery.toLowerCase())
 	);
 
 	// ソート機能
@@ -43,17 +43,33 @@
 	}
 
 	$: sortedCustomers = [...filteredCustomers].sort((a, b) => {
-		const aValue = a[sortField];
-		const bValue = b[sortField];
+		// 型安全にソートするためのヘルパー関数
+		const getValueByField = (customer: typeof customers[0], field: string) => {
+			switch(field) {
+				case 'id': return customer.id;
+				case 'name': return customer.name;
+				case 'email': return customer.email;
+				case 'balance': return customer.balance;
+				case 'storeType': return customer.storeType;
+				case 'storeId': return customer.storeId;
+				case 'createdAt': return customer.createdAt;
+				default: return '';
+			}
+		};
+
+		const aValue = getValueByField(a, sortField);
+		const bValue = getValueByField(b, sortField);
 		
 		if (typeof aValue === 'string' && typeof bValue === 'string') {
 			return sortDirection === 'asc' 
 				? aValue.localeCompare(bValue) 
 				: bValue.localeCompare(aValue);
-		} else {
+		} else if (typeof aValue === 'number' && typeof bValue === 'number') {
 			return sortDirection === 'asc' 
 				? aValue - bValue 
 				: bValue - aValue;
+		} else {
+			return 0;
 		}
 	});
 </script>
@@ -75,7 +91,7 @@
 					type="text"
 					id="search"
 					bind:value={searchQuery}
-					placeholder="顧客名、ニックネーム、メールアドレスで検索"
+					placeholder="顧客名、メールアドレス、ストアIDで検索"
 					class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
 				/>
 			</div>
@@ -106,8 +122,23 @@
 								<span>{sortDirection === 'asc' ? '↑' : '↓'}</span>
 							{/if}
 						</th>
-						<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-							ニックネーム
+						<th 
+							class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+							on:click={() => sortCustomers('storeType')}
+						>
+							ストアタイプ
+							{#if sortField === 'storeType'}
+								<span>{sortDirection === 'asc' ? '↑' : '↓'}</span>
+							{/if}
+						</th>
+						<th 
+							class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+							on:click={() => sortCustomers('storeId')}
+						>
+							ストアID
+							{#if sortField === 'storeId'}
+								<span>{sortDirection === 'asc' ? '↑' : '↓'}</span>
+							{/if}
 						</th>
 						<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 							メールアドレス
@@ -151,7 +182,20 @@
 								{customer.name}
 							</td>
 							<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-								{customer.nickname}
+								{#if customer.storeType === 'base'}
+									<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+										BASE
+									</span>
+								{:else if customer.storeType === 'shopify'}
+									<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+										Shopify
+									</span>
+								{:else}
+									未設定
+								{/if}
+							</td>
+							<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+								{customer.storeId}
 							</td>
 							<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
 								{customer.email}
